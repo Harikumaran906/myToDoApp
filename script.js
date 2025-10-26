@@ -4,11 +4,8 @@ const openBtn = document.getElementById('profile-btn');
 const closeBtn = document.getElementById('close-card');
 const formBox = document.getElementById('form-container');
 const tableBox = document.getElementById('todo-table');
-
 const miniName  = document.getElementById('popup-name');
-const miniEmail = document.getElementById('popup-email');
 const editNameBtn  = document.getElementById('edit-name');
-const editEmailBtn = document.getElementById('edit-email');
 
 function showOverlay() {
     overlay.classList.add('show');
@@ -40,7 +37,6 @@ if (overlay) overlay.addEventListener('click', (e) => {
     if (e.target === overlay) hideOverlay();
 });
 if (editNameBtn) editNameBtn.addEventListener('click', () => showMini('popup-name'));
-if (editEmailBtn) editEmailBtn.addEventListener('click', () => showMini('popup-email'));
 
 
 

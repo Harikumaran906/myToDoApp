@@ -57,25 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     }
 
-    if ($_POST['action'] === 'update_email') {
-        $newEmail = trim($_POST['new_email'] ?? '');
-        if ($newEmail === '' || !filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Please enter a valid email.';
-        } else {
-            try {
-                $stmt = $pdo->prepare("UPDATE users SET email = ? WHERE user_id = ?");
-                $stmt->execute([$newEmail, $currentUserId]);
-                $currentEmail = $newEmail;
-                $notice = 'Email updated.';
-            } catch (PDOException $e) {
-                if ($e->getCode() === '23000') {
-                    $errors[] = 'That email is already used by another account.';
-                } else {
-                    $errors[] = 'Database error while updating email.';
-                }
-            }
-        }
-    }
+    
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['action'])) {
@@ -165,7 +147,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="id-row">
                     <div class="id-label">E-mail:</div>
                     <div class="id-value" id="val-email"><?php echo htmlspecialchars($currentEmail, ENT_QUOTES, 'UTF-8'); ?></div>
-                    <button class="edit-btn" id="edit-email">Edit</button>
+                    
                 </div>
             </div>
 
@@ -182,18 +164,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </div>
 
-            <div class="mini-popup" id="popup-email">
-                <h3>Edit email</h3>
-                <form action="" method="post" novalidate>
-                    <input type="hidden" name="action" value="update_email">
-                    <input type="email" name="new_email" required
-                           value="<?php echo htmlspecialchars($currentEmail, ENT_QUOTES, 'UTF-8'); ?>">
-                    <div class="mini-actions">
-                        <button type="button" onclick="hideMini('popup-email')">Cancel</button>
-                        <button type="submit">Save</button>
-                    </div>
-                </form>
-            </div>
+            
         </div>
     </div>
 
