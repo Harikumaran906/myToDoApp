@@ -1,15 +1,14 @@
 <?php
-
 $pdo = new PDO('sqlite:todo.db');
-$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $pdo->exec("
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        pwd TEXT NOT NULL
+        pwd TEXT NOT NULL,
+        profile_pic TEXT
     )
 ");
 
@@ -36,12 +35,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Passwords do not match.";
     }
 
+    $uploadDir = 'uploads/';
+    $defaultPic = $uploadDir . 'default_pic.png';
+    $profilePath = $defaultPic;
+
+    if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
+        $fileTmp   = $_FILES['profile_pic']['tmp_name']; 
+        $fileName  = basename($_FILES['profile_pic']['name']); 
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($fileTmp, $targetPath)) {
+            $profilePath = $targetPath;
+        } else {
+            $errors[] = "Failed to upload profile picture. Using default image.";
+        }
+    }
+
+
     if (!$errors) {
         try {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $pdo->prepare("INSERT INTO users (name, email, pwd) VALUES (?, ?, ?)");
-            $stmt->execute([$name, $email, $hash]);
+            $stmt = $pdo->prepare("INSERT INTO users (name, email, pwd, profile_pic) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$name, $email, $hash, $profilePath]);
 
             $success = "Registration successful. You can now <a href=\"login.php\">log in</a>.";
         } catch (PDOException $e) {
@@ -53,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -65,11 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Register</title>
 </head>
 <body>
-    
     <h1>Register</h1>
 
     <div class="container">
-
         <?php if(!empty($errors)): ?>
             <div class="msg error">
                 <ul>
@@ -86,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form action="" method="post" novalidate>
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
             <label>
                 Name:
                 <input type="text" name="name" required value="<?php echo isset($name) ? htmlspecialchars($name, ENT_QUOTES, 'UTF-8') : ''; ?>">
@@ -105,6 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>
                 Confirm Password:
                 <input type="password" name="confirm" required>
+            </label>
+
+            <label>
+                Profile Picture:
+                <input type="file" name="profile_pic" accept="image/*">
             </label>
 
             <button type="submit">Create Account</button>

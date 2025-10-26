@@ -12,7 +12,8 @@ $pdo->exec("
         user_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        pwd TEXT NOT NULL
+        pwd TEXT NOT NULL,
+        profile_pic TEXT
     )
 ");
 

@@ -1,10 +1,20 @@
-h1{
+
+
+
+html{
+    background-color: rgb(122, 181, 122);
+    margin: 0;
+    padding: 0;
+}
+
+
+h1 {
     text-align: center;
     font-size: 60px;
     color: blue;
 }
 
-#form-container{
+#form-container {
     padding: 10px;
     height: 90px;
     margin: auto;
@@ -13,25 +23,23 @@ h1{
     width: 500px;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-table{
+table {
     margin: auto;
     border: 2px solid black;
     width: 70%;
 }
 
-th, td{
+th, td {
     padding: 5px;
     height: 30px;
     border: 2px solid black;
-    
 }
-
 
 a.button {
     display: inline-block;
@@ -43,12 +51,194 @@ a.button {
     color: black;
 }
 
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.msg {
+    margin: 10px 0;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+.error {
+    background: #e7bfbf;
+}
+
+.success {
+    background: #99c599;
+}
+
+input {
+    padding: 8px;
+}
+
+button {
+    padding: 8px;
+}
+
+a {
+    text-decoration: none;
+}
 
 
-.container { max-width: 500px; margin: 20px auto; border: 1px solid #000; padding: 15px; }
-.msg { margin: 10px 0; padding: 8px; border: 1px solid #000; }
-.error { background: #ffd6d6; }
-.success { background: #d6ffd6; }
-input { padding: 8px; }
-button { padding: 8px; }
-a { text-decoration: none; }
+
+.topbar {
+    width: 70%;
+    margin: 10px auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#profile-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    background: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.id-card {
+    width: 560px;
+    max-width: 92vw;
+    background: #efe4b8;
+    border: 2px solid black;
+    border-radius: 28px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.id-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 22px;
+    line-height: 22px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2px 8px;
+    background: white;
+}
+
+.id-left {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+    border: 3px solid black;
+    border-radius: 8px;
+    background: white;
+    background-size: cover;
+    background-position: center;
+}
+
+.vert-line {
+    width: 2px;
+    background: red;
+    height: 160px;
+    border-radius: 2px;
+}
+
+.id-right {
+    flex: 1;
+}
+
+.id-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.id-label {
+    width: 80px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.id-value {
+    color: #222222;
+}
+
+.edit-btn {
+    margin-left: auto;
+    padding: 3px 8px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background: #cfe8ff;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.mini-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 14px;
+    width: 280px;
+    z-index: 3;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    display: none;
+}
+
+.mini-popup.show {
+    display: block;
+}
+
+.mini-popup h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.mini-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.mini-actions button {
+    padding: 6px 10px;
+}
+
+.flash {
+    width: 70%;
+    margin: 10px auto;
+}
+
+.flash .msg {
+    margin: 0;
+}
+
+
