@@ -129,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <p>Already registered? <a href="login.php">Log in</a>.</p>
-        <p><a href="index.php">Back to Home</a></p>
     </div>
 </body>
 </html>

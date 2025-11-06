@@ -57,9 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 </head>
 <body>
-    <h1>Log in</h1>
+    <h1>My Todos</h1>
 
     <div class="container">
+        <h3>Log in</h3>
         <?php if (!empty($errors)): ?>
             <div class="msg error">
                 <ul>
@@ -85,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <p>New here? <a href="register.php">Create an account</a>.</p>
-        <p><a href="index.php">Back to Home</a></p>
     </div>
 </body>
 </html>

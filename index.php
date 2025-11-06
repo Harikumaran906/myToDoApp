@@ -104,15 +104,25 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>My Todo App</h1>
+    <header>
+        <h1>My Todos</h1>
+        <div id="prof-icon" style="background-image:url('<?php echo htmlspecialchars($currentPic, ENT_QUOTES, 'UTF-8'); ?>');"></div>
+    </header>
+    
+
+    <div id="dashboard">
+        <div id="profile-btn" class="dashBtn">Profile</div>
+        <div id="logoutBtn" class="dashBtn">Logout</div>
+    </div>
 
     <div class="topbar">
         <div>Welcome, <strong><?php echo htmlspecialchars($currentName, ENT_QUOTES, 'UTF-8'); ?></strong></div>
-        <div style="display:flex; gap:10px; align-items:center;">
-            <div id="profile-btn">Profile</div>
-            <a href="logout.php" class="button">Logout</a>
-        </div>
+        
     </div>
+
+    
+
+    
 
     <?php if ($notice || !empty($errors)): ?>
     <div class="flash">
@@ -158,7 +168,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <input type="text" name="new_name" required
                            value="<?php echo htmlspecialchars($currentName, ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="mini-actions">
-                        <button type="button" onclick="hideMini('popup-name')">Cancel</button>
                         <button type="submit">Save</button>
                     </div>
                 </form>
@@ -168,35 +177,36 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <div id="form-container">
-        <form action="" method="post">
-            <input type="text" name="title" id="title" placeholder="Task title..." required>
-            <button type="submit">Add Task</button>
-        </form>
+    <div id="form-container" class="overlay" aria-hidden="true">
+        <div class="addTaskCard">
+            <form action="" method="post">
+                <input type="text" name="title" id="title" placeholder="Task title..." required>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+        
     </div>
+
+    <div id="add-task">Add Task</div>
 
     <table id="todo-table">
         <tr>
-            <th>Index</th>
             <th>Task Title</th>
-            <th>Status</th>
             <th>Done/Undone</th>
             <th>Delete</th>
         </tr>
         <?php if (!$rows): ?>
             <tr>
-                <td>0</td>
                 <td>No tasks</td>
-                <td> - </td>
                 <td> - </td>
                 <td> - </td>
             </tr>
         <?php else: ?>
             <?php foreach ($rows as $t): ?>
                 <tr>
-                    <td><?php echo (int)$t['task_id']; ?></td>
-                    <td><?php echo htmlspecialchars($t['title'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo ((int)$t['is_done'] === 1) ? '[done]' : ''; ?></td>
+                    <td class="<?php echo ((int)$t['is_done'] === 1) ? 'done-task' : ''; ?>">
+                        <?php echo htmlspecialchars($t['title'], ENT_QUOTES, 'UTF-8'); ?>
+                    </td>
                     <td><a href="?toggle=<?php echo (int)$t['task_id']; ?>" class="button">Toggle</a></td>
                     <td><a href="?delete=<?php echo (int)$t['task_id']; ?>" class="button" onclick="return confirm('Delete this task?');">Delete</a></td>
                 </tr>

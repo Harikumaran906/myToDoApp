@@ -2,7 +2,7 @@
 
 
 html{
-    background-color: rgb(122, 181, 122);
+    background-color: rgb(248, 248, 248);
     margin: 0;
     padding: 0;
 }
@@ -14,13 +14,25 @@ h1 {
     color: blue;
 }
 
-#form-container {
-    padding: 10px;
-    height: 90px;
-    margin: auto;
-    margin-bottom: 30px;
+#form-container form{
     background-color: grey;
     width: 500px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+
+#add-task {
+    width: 120px;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    background-color: lightblue;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 form {
@@ -35,11 +47,22 @@ table {
     width: 70%;
 }
 
+table td:first-child {
+    width: 600px;
+    text-align: center;
+}
+
 th, td {
     padding: 5px;
     height: 30px;
     border: 2px solid black;
 }
+
+.done-task {
+    text-decoration: line-through;
+    color: gray;
+}
+
 
 a.button {
     display: inline-block;
@@ -52,10 +75,12 @@ a.button {
 }
 
 .container {
+    background-color: white;
     max-width: 500px;
     margin: 20px auto;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .msg {
@@ -73,7 +98,9 @@ a.button {
 }
 
 input {
+    width: 95%;
     padding: 8px;
+    margin: 5px;
 }
 
 button {
@@ -84,7 +111,33 @@ a {
     text-decoration: none;
 }
 
+#prof-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
 
+#dashboard{
+    position: absolute;
+    width: 25%;
+    height: 75vh;
+    background-color: #333333;
+    right: 0;
+    padding: 1%;
+    display: none;
+}
+
+#dashboard.show{
+    display: flex;
+    flex-direction: column;
+}
 
 .topbar {
     width: 70%;
@@ -94,13 +147,27 @@ a {
     align-items: center;
 }
 
-#profile-btn {
+.dashBtn {
     display: inline-block;
     padding: 6px 12px;
     border: 1px solid black;
     border-radius: 6px;
     cursor: pointer;
-    background: white;
+    background: #222222;
+    margin: 5px 0;
+    color: yellow;
+}
+
+.dashBtn > a {    
+    text-decoration: none;
+}
+
+.dashBtn > a:hover {
+    text-decoration: none;
+}
+
+.dashBtn > a:visited {
+    text-decoration: none;
 }
 
 .hidden {
@@ -132,7 +199,7 @@ a {
     gap: 22px;
     align-items: center;
     position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .id-close {
